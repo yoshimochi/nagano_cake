@@ -9,11 +9,13 @@
     <th>ステータス</th>
   </tr>
   <tr>
+  <% @items.each do |item| %>
+    <td><%= item.id %></td>
+    <td><%= item.name %></td>
+    <td><%= item.price %></td>
     <td></td>
     <td></td>
-    <td></td>
-    <td></td>
-    <td></td>
+  <% end %>
   </tr>
 </table>
 
