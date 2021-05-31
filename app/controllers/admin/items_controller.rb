@@ -10,7 +10,7 @@ class Admin::ItemsController < ApplicationController
   def create
     item = Item.new(item_params)
     item.save
-    redirect_to '/'
+    redirect_to '/admin/items'
   end
 
   def show

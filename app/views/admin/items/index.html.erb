@@ -1,21 +1,27 @@
 <h2>商品一覧</h2>
 
 <table>
-  <tr>
-    <th>商品ID</th>
-    <th>商品名</th>
-    <th>税抜価格</th>
-    <th>ジャンル</th>
-    <th>ステータス</th>
-  </tr>
-  <tr>
+  <thead>
+    <tr>
+      <th>商品ID</th>
+      <th>商品名</th>
+      <th>税抜価格</th>
+      <th>ジャンル</th>
+      <th>ステータス</th>
+    </tr>
+    <tr>
+  </thead>
+  <tbody>
   <% @items.each do |item| %>
+    <tr>
     <td><%= item.id %></td>
     <td><%= item.name %></td>
-    <td><%= item.price %></td>
-    <td></td>
-    <td></td>
+    <td><%= converting_to_jpy(item.price) %></td>
+    <!--converting_to_jpy(product.price)-->
+    <td><%= item.genre.name %></td>
+    <td>ステータス</td>
+    </tr>
   <% end %>
-  </tr>
+  </tbody>
 </table>
 
