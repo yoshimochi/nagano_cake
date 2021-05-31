@@ -15,13 +15,19 @@
   <% @items.each do |item| %>
     <tr>
     <td><%= item.id %></td>
-    <td><%= item.name %></td>
+    <td><%= link_to item.name, admin_item_path(item.id) %></td>
     <td><%= converting_to_jpy(item.price) %></td>
-    <!--converting_to_jpy(product.price)-->
     <td><%= item.genre.name %></td>
-    <td>ステータス</td>
+    <td>
+      <% if item.validate == true %>
+        <%= "販売中" %>
+      <% else %>
+        <% "売り切れ" %>
+      <% end %>
+    </td>
     </tr>
   <% end %>
   </tbody>
 </table>
+<%= paginate @items %>
 
