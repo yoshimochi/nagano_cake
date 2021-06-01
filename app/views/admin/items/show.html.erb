@@ -1,0 +1,19 @@
+<h2>商品詳細</h2>
+
+<%= attachment_image_tag @item, :image, fallback: "no_image.png", size: "100x100" %>
+<p>商品名　<%= @item.name %></p>
+<p>商品説明　<%= @item.introduction %></p>
+<p>ジャンル  <%= @item.genre.name %></p>
+<p>税抜価格<br>
+    (税込価格) <%= converting_to_jpy(@item.price) %>（<%= @item.add_tax_price.to_s(:delimited) %>） 円
+</p>
+<p>
+    販売ステータス
+   <% if @item.validate == true %>
+        <%= "販売中" %>
+    <% else %>
+        <% "売り切れ" %>
+    <% end %>
+</p>
+
+<%= link_to '編集する', edit_admin_item_path(@item.id) %>
