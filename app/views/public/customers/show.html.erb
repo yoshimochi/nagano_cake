@@ -1,0 +1,48 @@
+<!--% @customers.each do |customer| %>-->
+  <div>
+    <h4>マイページ</h4>
+
+    <h4>登録情報</h4>
+    <p><%=link_to '編集する', public_customers_edit_path %></p>
+  </div>
+
+  <table>
+    <tbody>
+      <tr>
+        <th>氏名</th>
+        <td>
+          <%= @customer.last_name %>
+          <%= @customer.first_name %>
+        </td>
+      </tr>
+
+      <tr>
+        <th>カナ</th>
+        <td>
+          <%= @customer.last_name_kana %>
+          <%= @customer.first_name_kana %>
+        </td>
+      </tr>
+
+      <tr>
+        <th>郵便番号</th>
+        <td><%= @customer.postal_code %></td>
+      </tr>
+
+      <tr>
+        <th>住所</th>
+        <td><%= @customer.address %></td>
+      </tr>
+
+      <tr>
+        <th>電話番号</th>
+        <td><%= @customer.telephone_number %></td>
+      </tr>
+
+      <tr>
+        <th>メールアドレス</th>
+        <td><%= @customer.email %></td>
+      </tr>
+    </tbody>
+  </table>
+<!--% end %>-->
