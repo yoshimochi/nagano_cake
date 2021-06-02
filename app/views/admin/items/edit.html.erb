@@ -4,7 +4,7 @@
   <h4>商品名　<%=f.text_field :name %></h4>
   <h4>商品説明 <%= f.text_area :introduction %></h4>
   <h4>ジャンル <%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "-- 選択して下さい --" %></h4>
-  <h4>税抜価格 <%= f.text_area :price %></h4>
+  <h4>税抜価格 <%= f.text_field :price %>円</h4>
   <h4>
     販売ステータス
     <%= f.radio_button :is_active, :true %>

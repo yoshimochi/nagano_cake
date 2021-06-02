@@ -1,13 +1,20 @@
 Rails.application.routes.draw do
+  devise_for :customers, module: "customers"
+  # , controllers: {
+  #   sessions:       'customers/sessions',
+  #   passwords:      'customers/passwords',
+  #   registrations:  'customers/registrations',
+  # }
   namespace :admin do
     get 'genres/index'
     get 'genres/edit'
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  devise_for :admins
+  devise_for :admins, path: 'admin',  module: "admins"
   # , controllers: {
-  #   sessions:       'admins/sessions',
-  #   registrations:  'admins/registrations'
+  #   sessions:       'admin/sessions'
+  #   # passwords:      'admins/passwords',
+  #   # registrations:  'admins/registrations',
   # }
   # root 'homes#top'
 
