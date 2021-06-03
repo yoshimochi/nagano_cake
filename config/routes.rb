@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
-  devise_for :customers, module: "customers"
+  scope module: :public do
+    root to: 'homes#top'
+    get 'about' => 'homes#about'
+    get 'customers/mypage' => 'customers#show'
+    get 'customers/edit' => 'customers#edit'
+    patch 'customers' => 'customers#update'
+  end
 
-namespace :public do
-  get 'customers/mypage' => 'customers#show'
-  get 'customers/edit' => 'customers#edit'
-  patch 'customers' => 'customers#update'
-end
+  devise_for :customers, module: "customers"
 
   devise_for :admins, path: 'admin',  module: "admins"
 
