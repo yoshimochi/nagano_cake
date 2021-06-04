@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'customers/mypage' => 'customers#show'
     get 'customers/edit' => 'customers#edit'
     patch 'customers' => 'customers#update'
+    resources :items, only:[:index, :show]
   end
 
   devise_for :customers, module: "customers"
