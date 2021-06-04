@@ -11,9 +11,20 @@
 
   <body>
     <% if admin_signed_in? %>
+      <li>
+        ようこそ  さん！
+      </li>
 
       <li>
-        <%= link_to "マイページ", public_customers_mypage_path %>
+        <%= link_to "マイページ", customers_mypage_path %>
+      </li>
+
+      <li>
+        商品一覧
+      </li>
+
+      <li>
+        カート
       </li>
 
       <li>
@@ -21,8 +32,17 @@
       </li>
     <% else %>
       <li>
+        <%= link_to "About", 'about' %>
+      </li>
+
+      <li>
+        商品一覧
+      </li>
+
+      <li>
         <%= link_to "新規登録", new_admin_registration_path %>
       </li>
+
       <li>
         <%= link_to "ログイン", new_admin_session_path %>
       </li>
