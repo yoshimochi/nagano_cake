@@ -34,6 +34,9 @@ ActiveRecord::Schema.define(version: 2021_06_04_131605) do
   end
 
   create_table "cart_items", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "customer_id"
+    t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -76,11 +79,25 @@ ActiveRecord::Schema.define(version: 2021_06_04_131605) do
   end
 
   create_table "order_products", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "item_id"
+    t.integer "tax_included"
+    t.integer "amount"
+    t.integer "total_price"
+    t.integer "making_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "orders", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string "delivery_postal_code"
+    t.string "delivery_address"
+    t.string "delivery_name"
+    t.integer "delivery_cost", default: 800
+    t.integer "charge"
+    t.integer "payment_method", default: 0
+    t.integer "status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
