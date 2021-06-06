@@ -7,7 +7,12 @@ Rails.application.routes.draw do
     get 'customers/edit' => 'customers#edit'
     patch 'customers' => 'customers#update'
     resources :items, only:[:index, :show]
-    resources :cart_items, only:[:index, :update, :destroy, :create]
+    resources :cart_items, only:[:index, :update, :destroy, :create] do
+      collection do
+        delete 'destroy_all'
+      end
+    end  
+    # delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
   end
 
   devise_for :customers, module: "customers"

@@ -1,4 +1,5 @@
 <h2>ショッピングカート</h2>
+<%= button_to "カートを空にする", destroy_all_cart_items_path, method: :delete %>
 
 <table>
   <thead>
@@ -15,7 +16,9 @@
   <% @cart_items.each do |cart_item| %>
     <tr>
       <td>
+      <%= link_to items_path do %>
         <%= attachment_image_tag cart_item.item, :image, fallback: "no_image.png", size: "60x60" %>
+      <% end %>
         <%= cart_item.item.name %>
       </td>
       <td>
@@ -43,7 +46,9 @@
 
 <table>
   <tr>
-    <td>合計</td>
+    <td>合計金額</td>
     <th><%= @sum.round.to_s(:delimited) %></th>
   </tr>
 </table>
+
+<
