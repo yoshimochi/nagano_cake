@@ -1,0 +1,22 @@
+<h2>注文情報確認</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>商品名</th>
+      <th>単価(税込価格)</th>
+      <th>数量</th>
+      <th>小計</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= form_with model:@cart_item, local:true do |f| %>
+    <tr>
+      <td><%= cart_item.name %></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

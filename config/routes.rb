@@ -11,8 +11,13 @@ Rails.application.routes.draw do
       collection do
         delete 'destroy_all'
       end
-    end  
-    # delete '/cart_items/destroy_all' => 'cart_items#destroy_all'
+    end
+    resources :orders, only:[:new, :create, :index, :show] do
+      collection do
+        post 'confirm'
+      end
+    end
+    # post 'orders/comfirm' => 'orders#comfirm'
   end
 
   devise_for :customers, module: "customers"

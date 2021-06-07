@@ -1,9 +1,12 @@
 <%= attachment_image_tag @item, :image, fallback: "no_image.png", size: "100x100" %>
-<p><%= @item.name %></p>
+
+<h3><%= @item.name %></h3>
 <p><%= @item.introduction %></p>
-<p>¥ <%= @item.add_tax_price.to_s(:delimited) %>(税込）</p>
-<%= form_with model: @curt_item, url: cart_items_path, local:true do |f| %>
-  <%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
-  <%= f.hidden_field :item_id, :value => @item.id %>
-  <%= f.submit "カートに入れる" %>
+<p>¥ <%= tax_price(@item.price).to_s(:delimited) %><span>(税込)</span></p>
+<% if @item.is_active == true %>
+  <%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
+    <%= f.hidden_field :item_id, value: @item.id %>
+    <%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
+    <%= f.submit "カートに入れる" %>
+  <% end %>
 <% end %>
