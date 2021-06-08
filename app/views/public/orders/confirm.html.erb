@@ -10,13 +10,40 @@
     </tr>
   </thead>
   <tbody>
-    <%= form_with model:@cart_item, local:true do |f| %>
+    <% @cart_items.each do |cart_item| %>
     <tr>
-      <td><%= cart_item.name %></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <th>
+        <%= attachment_image_tag cart_item.item, :image, fallback: "no_image.png", size: "50x50" %>
+        <%= cart_item.item.name %>
+      </th>
+      <td>
+        <%= tax_price(cart_item.item.price).to_s(:delimited) %>
+      </td>
+      <td><%= cart_item.amount %></td>
+      <td> <%= (tax_price(cart_item.item.price) * cart_item.amount).to_s(:delimited) %></td>
     </tr>
     <% end %>
   </tbody>
 </table>
+
+<table>
+  <thead>
+    <tr>
+      <th>送料</th>
+      <td><%= @order.delivery_cost %></td>
+    </tr>
+    <tr>
+      <th>商品合計</th>
+      <td><%= total_price(@cart_items).to_s(:delimited) %></td>
+    </tr>
+    <tr>
+      <th>請求金額</th>
+      <td><%= (total_price(@cart_items) + @order.delivery_cost).to_s(:delimited) %></td>
+    </tr>
+  </thead>
+</table>
+
+<h3>支払方法</h3>
+<p><%= @order.payment_method %></p>
+<h3>お届け先</h3>
+<p><%= @order.delivery_postal_code %></p>

@@ -3,11 +3,12 @@ class Public::CartItemsController < ApplicationController
   # before_action :setup_cart_item!, only: [:create, :update, :destroy]
   def index
     @cart_items = current_customer.cart_items
+    @numbers = (1..20).to_a
   end
 
   def update
     @cart_item = CartItem.find(params[:id])
-    @cart_item.update(amount: params[:cart_item][:amount].to_i)
+    @cart_item.update(amount: params[:amount].to_i)
     flash[:notice] = "#{@cart_item.item.name}の数量を変更しました。"
     redirect_to cart_items_path
   end
