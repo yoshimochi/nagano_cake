@@ -18,9 +18,13 @@ module ApplicationHelper
     end
     return price
   end
-  
+
+  def charge(order)
+    total_price(current_customer.cart_items) + order.delivery_cost
+  end
+
   def current_cart
     @cart_items = current_customer.cart_items
   end
-  
+
 end

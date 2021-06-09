@@ -1,8 +1,22 @@
 Rails.application.routes.draw do
+  root to: 'homes#top'
+  get 'about' => 'homes#about'
+
+  devise_for :admins, path: 'admins', controllers: {
+    sessions: 'admins/sessions',
+    passwords: 'adminds/passwords',
+    registrations: 'admins/registrations'
+  }
+
+  devise_for :customers, path: 'customers'
+  # , path: 'customers', controllers: {
+  #   sessions: 'customers/sessions',
+  #   passwords: 'customers/passwords',
+  #   registrations: 'customers/registrations'
+  # }
+
 
   scope module: :public do
-    root to: 'homes#top'
-    get 'about' => 'homes#about'
     get 'customers/mypage' => 'customers#show'
     get 'customers/edit' => 'customers#edit'
     patch 'customers' => 'customers#update'
@@ -15,14 +29,13 @@ Rails.application.routes.draw do
     resources :orders, only:[:new, :create, :index, :show] do
       collection do
         post 'confirm'
+        get 'thanks'
       end
     end
-    # post 'orders/comfirm' => 'orders#comfirm'
+    resources :addresses, only:[:index, :edit, :create, :update, :destroy]
   end
 
-  devise_for :customers, module: "customers"
 
-  devise_for :admins, path: 'admin',  module: "admins"
 
   namespace :admin do
     get '/' => 'homes#top'
