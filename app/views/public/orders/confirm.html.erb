@@ -1,5 +1,5 @@
 <h2>注文情報確認</h2>
-
+<%= form_with model: @order, local:true do |f| %>
 <table>
   <thead>
     <tr>
@@ -50,16 +50,16 @@
   〒<%= @order.delivery_postal_code %>　<%= @order.delivery_address %><br />
   <%= @order.delivery_name %>
 </p>
+  <%= f.submit '注文を確定する' %>
 
 <div>
-  <%= form_with model: @order, local:true do |f| %>
-    <%= f.hidden_field :customer_id %>
-    <%= f.hidden_field :delivery_postal_code %>
-    <%= f.hidden_field :delivery_address %>
-    <%= f.hidden_field :delivery_name %>
-    <%= f.hidden_field :payment_method %>
-    <%= f.hidden_field :total_price %>
+  <!--%= form_with model: @order, local:true do |f| %>-->
+    <%= f.hidden_field :name, :value => @order.delivery_name %>
+    <%= f.hidden_field :address, :value => @order.delivery_address %>
+    <%= f.hidden_field :postcode, :value => @order.delivery_postal_code %>
+    <%= f.hidden_field :payment_method, :value => @order.payment_method %>
+    <!--%= f.hidden_field :total_payment, :value => billing %>-->
+
     <%= f.hidden_field :billing %>
-    <%= f.submit '注文を確定する' %>
-  <% end %>
+<% end %>
 </div>
