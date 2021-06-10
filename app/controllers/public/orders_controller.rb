@@ -1,4 +1,5 @@
 class Public::OrdersController < ApplicationController
+  include ApplicationHelper
 
   def new
     # @customer = current_customer
@@ -23,15 +24,10 @@ class Public::OrdersController < ApplicationController
       @order.delivery_address = address
       @order.delivery_name = name
     elsif params[:order][:current_customer] == "new_delivery_address"
-      @address = Address.new
-      @address.name = params[:order][:name]
-      @address.postcode = params[:order][:postal_code]
-      @address.address = params[:order][:address]
-      @address.customer_id = current_customer.id
-      @address.save!
-      @order.delivery_postal_code = @address.postal_code
-      @order.delivery_address = @address.address
-      @order.delivery_name = @address.name
+      @order.delivery_postal_code = params[:order][:postal_code]
+      @order.delivery_address = params[:order][:address]
+      @order.delivery_name = params[:order][:name]
+      @delivery = "1"
     else
       @order = Order.new
       render :new
@@ -40,44 +36,33 @@ class Public::OrdersController < ApplicationController
 
   def create
     @order = Order.new(order_params)
-    @order.customer_id = current_customer.id
-   if @order.save
-     @carts = current_customer.cart_items
-     @carts.each do |cart|
-       order_item = OrderItem.new(order_id: @order.id)
-       order_item.price = cart.price
-       order_item.amount = cart.amount
-       order_item.item_id = cart.item_id
-       order_item.save!
-     end
-     @carts.destroy_all
-     redirect_to thanks_orders_path
-   else
-      @order = Order.new
-      render :new
-   end
+    @order.save
+    redirect_to thanks_orders_path
 
+    if params[:order][:current_customer] == "1"
+      current_customer.addresses.create(address_params)
+    end
+
+     @cart_items = current_customer.cart_items
+     @cart_items.each do |cart|
+      OrderProduct.create(
+        item: cart.item,
+        order: @order,
+        amount: cart.amount,
+        total_price: cart.item.price
+        )
+     end
+     @cart_items.destroy_all
   end
 
-  #   @cart_items.each do |cart_item|
-  #     @order_items = @order.order_items.new
-  #     @order_items.item_id = cart_item.item_id
-  #     @order_items.price = cart_item.price
-  #     @order_items.amount = cart_item.amount
-  #     @order_items.save
-  #   end
-  #   @cart_items.destroy_all
-  #   redirect_to thanks_orders_path
-
-  # end
-
   def index
-    @orders = current_customer.orders
+    @orders = current_customer.orders.all
   end
 
   def show
     @order = Order.find(params[:id])
-    @order_items = @order.order_items
+    @order_products = @order.order_products
+    @orders = current_customer.orders
   end
 
   private
@@ -88,7 +73,7 @@ class Public::OrdersController < ApplicationController
     )
   end
 
-  # def address_params
-  #   params.require(:order).permit(:name, :postal_code, :address)
-  # end
+  def address_params
+    params.require(:order).permit(:name, :postal_code, :address)
+  end
 end
