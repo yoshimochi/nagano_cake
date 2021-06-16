@@ -1,4 +1,5 @@
 <h2>商品一覧</h2>
+<%= link_to '＋', new_admin_item_path %>
 
 <table>
   <thead>
@@ -19,10 +20,10 @@
     <td><%= converting_to_jpy(item.price) %></td>
     <td><%= item.genre.name %></td>
     <td>
-      <% if item.validate == true %>
-        <%= "販売中" %>
-      <% else %>
-        <% "売り切れ" %>
+      <% if item.is_active == true %>
+        <p>販売中</p>
+      <% elsif item.is_active == false %>
+        <p>販売停止中</p>
       <% end %>
     </td>
     </tr>

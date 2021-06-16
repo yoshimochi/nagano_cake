@@ -1,6 +1,6 @@
-<h4>会員情報編集</h4>
+<h4>会員情報</h4>
 
-<%=form_with model:@customer, url: customers_path, local:true do |f| %>
+<%=form_with model:@customer, local:true do |f| %>
 
   <div>
     <label>氏名</label>
@@ -35,5 +35,5 @@
   </div>
 
   <%= f.submit '変更内容を保存' %>
-
+  <%= link_to '退会する', customers_unsubscribe_path %>
 <% end %>
