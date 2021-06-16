@@ -19,7 +19,7 @@ module ApplicationHelper
     return price
   end
 
-  def charge(order)
+  def billing(order)
     total_price(current_customer.cart_items) + order.delivery_cost
   end
 

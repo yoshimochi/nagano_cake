@@ -1,6 +1,6 @@
 class Public::CartItemsController < ApplicationController
-  # before_action :authenticate_custmor!
-  # before_action :setup_cart_item!, only: [:create, :update, :destroy]
+  # before_action :authenticate_customers!
+
   def index
     @cart_items = current_customer.cart_items
     @numbers = (1..20).to_a

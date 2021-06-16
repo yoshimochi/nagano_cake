@@ -1,6 +1,7 @@
 <h2>新規登録画面</h2>
 
-<%= form_with model: @customer, url:customer_registration_path, local:true do |f| %>
+<%= form_with scope: resource, url: registration_path(resource_name), local: true do |f| %>
+<!--%= form_with model: @customer, url:customer_registration_path, local:true do |f| %>-->
   <%= render "customers/shared/error_messages", resource: resource %>
 
   <div class="field">
@@ -18,7 +19,7 @@
   </div>
 
   <div class="field">
-    <%= f.label "郵便番号(ハイフンなし)" %>　<%= f.text_field :postal_code, autofocus: true, placeholder: "0000000" %>
+    <%= f.label "郵便番号(ハイフンなし)" %>　<%= f.text_field :postal_code, placeholder: "0000000" %>
   </div>
 
   <div class="field">

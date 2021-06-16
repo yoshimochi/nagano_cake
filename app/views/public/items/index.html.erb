@@ -1,4 +1,4 @@
-<h3>商品一覧</h3>
+<h3>商品一覧 (全<%= @items.total_count %>件)</h3><br />
 
 <% @items.each do |item| %>
   <%= link_to item_path(item.id) do %>

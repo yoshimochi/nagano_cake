@@ -1,8 +1,8 @@
 <h2>注文情報入力</h2>
 
+<%= form_with model:@order, url: confirm_orders_path(@order), local:true do |f| %>
 <div>
   <h4>支払方法</h4>
-  <%= form_with model:@order, url: confirm_orders_path(@order), local:true do |f| %>
     <%= f.radio_button :payment_method, :クレジットカード %>
     <%= f.label :payment_method, "クレジットカード" %><br />
     <%= f.radio_button :payment_method, :銀行振込 %>
@@ -20,7 +20,7 @@
     <div>
       <%= f.radio_button :current_customer, "delivery_address" %>
       <%= f.label :current_customer, '登録済住所から選択' %><br />
-      <%= f.collection_select(:address_id, current_customer.addresses.all, :id, :address) %>
+      <%= f.collection_select(:address_id, @addresses, :id, :order_address) %>
     </div>
     <div>
       <%= f.radio_button :current_customer, "new_delivery_address" %>
@@ -28,19 +28,19 @@
     </div>
     <div>
       <div>
-        <%= f.label :delivery_postal_code, "郵便番号(ハイフンなし)" %>
+        <%= f.label :current_customer, "郵便番号(ハイフンなし)" %>
         <%= f.text_field :delivery_postal_code,  autofocus: true, placeholder: "0000000" %>
       </div>
       <div>
-        <%= f.label :delivery_address, "お届け先" %>
+        <%= f.label :current_customer, "お届け先" %>
         <%= f.text_field :delivery_address, autofocus: true, placeholder: "東京都渋谷区代々木神園町０-０" %>
       </div>
       <div>
-        <%= f.label :delivery_name, "宛名" %>
+        <%= f.label :current_customer, "宛名" %>
         <%= f.text_field :delivery_name, autofocus: true, placeholder: "令和道子" %>
       </div>
     </div>
       <%= f.submit '確認画面に進む' %>
-  <% end %>
 </div>
+<% end %>
 

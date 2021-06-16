@@ -1,5 +1,4 @@
 <h2>注文情報確認</h2>
-<%= form_with model: @order, local:true do |f| %>
 <table>
   <thead>
     <tr>
@@ -10,17 +9,17 @@
     </tr>
   </thead>
   <tbody>
-    <% @cart_items.each do |cart| %>
+    <% @cart_items.each do |cart_item| %>
     <tr>
       <th>
-        <%= attachment_image_tag cart.item, :image, fallback: "no_image.png", size: "50x50" %>
-        <%= cart.item.name %>
+        <%= attachment_image_tag cart_item.item, :image, fallback: "no_image.png", size: "50x50" %>
+        <%= cart_item.item.name %>
       </th>
       <td>
-        <%= tax_price(cart.item.price).to_s(:delimited) %>
+        <%= tax_price(cart_item.item.price).to_s(:delimited) %>
       </td>
-      <td><%= cart.amount %></td>
-      <td> <%= (tax_price(cart.item.price) * cart.amount).to_s(:delimited) %></td>
+      <td><%= cart_item.amount %></td>
+      <td> <%= (tax_price(cart_item.item.price) * cart_item.amount).to_s(:delimited) %></td>
     </tr>
     <% end %>
   </tbody>
@@ -38,7 +37,7 @@
     </tr>
     <tr>
       <th>請求金額</th>
-      <td><%= charge(@order).to_s(:delimited) %></td>
+      <td><%= billing(@order).to_s(:delimited) %></td>
     </tr>
   </thead>
 </table>
@@ -50,19 +49,18 @@
   〒<%= @order.delivery_postal_code %>　<%= @order.delivery_address %><br />
   <%= @order.delivery_name %>
 </p>
-  <%= f.submit '注文を確定する' %>
 
+<%= form_with model: @order, local:true do |f| %>
 <div>
-  <!--%= form_with model: @order, local:true do |f| %>-->
-    <%= f.hidden_field :customer_id %>
-    <%= f.hidden_field :delivery_name %>
-    <%= f.hidden_field :delivery_address %>
-    <%= f.hidden_field :delivery_postal_code %>
-    <%= f.hidden_field :delivery_cost %>
-    <%= f.hidden_field :charge %>
-    <%= f.hidden_field :total_price %>
-    <%= f.hidden_field :status %>
-
-    <%= f.hidden_field :billing %>
-<% end %>
+  <%= f.hidden_field :customer_id %>
+  <%= f.hidden_field :delivery_postal_code %>
+  <%= f.hidden_field :delivery_address %>
+  <%= f.hidden_field :delivery_name %>
+  <%= f.hidden_field :delivery_cost %>
+  <%= f.hidden_field :charge %>
+  <%= f.hidden_field :total_price %>
+  <%= f.hidden_field :status %>
+  <%= f.hidden_field :payment_method %>
+  <%= f.submit '注文を確定する' %>
 </div>
+<% end %>

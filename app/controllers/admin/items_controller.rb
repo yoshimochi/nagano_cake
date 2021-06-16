@@ -1,4 +1,6 @@
 class Admin::ItemsController < ApplicationController
+  before_action :authenticate_admin!
+
   def index
     @items = Item.all.order(created_at: :asc).page(params[:page]).per(10)
   end
@@ -10,7 +12,7 @@ class Admin::ItemsController < ApplicationController
   def create
     item = Item.new(item_params)
     item.save
-    redirect_to '/admin/items'
+    redirect_to admin_items_path
   end
 
   def show
@@ -24,7 +26,7 @@ class Admin::ItemsController < ApplicationController
   def update
     @item = Item.find(params[:id])
     @item.update(item_params)
-    redirect_to '/admin/items'
+    redirect_to admin_items_path
   end
 
   private

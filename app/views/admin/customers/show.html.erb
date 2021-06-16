@@ -39,11 +39,14 @@
   <tr>
     <th>会員ステータス</th>
     <td>
-      <% if @customer.validate == false %>
-        <%= "有効" %>
-      <% else %>
-        <% "退会" %>
+      <% if @customer.is_active == false %>
+        <p>有効</p>
+      <% elsif @customer.is_active == true %>
+        <p>退会</p>
       <% end %>
     </td>
   </tr>
 </table>
+
+<%= link_to '編集する', edit_admin_customer_path(@customer.id) %>
+<%= link_to '注文一覧を見る', admin_root_path(@customer) %>

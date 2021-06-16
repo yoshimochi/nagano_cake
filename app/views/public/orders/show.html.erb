@@ -26,15 +26,15 @@
   <table>
     <tr>
       <td>商品合計</td>
-      <th></th>
+      <th><%= @order.total_price.to_s(:delimited) %>円</th>
     </tr>
     <tr>
       <td>配送料</td>
-      <th><%= @order.delivery_cost %></th>
+      <th><%= @order.delivery_cost %>円</th>
     </tr>
     <tr>
       <td>ご請求額</td>
-      <th></th>
+      <th><%= (@order.total_price + @order.delivery_cost).to_s(:delimited)  %>円</th>
     </tr>
   </table>
 </div>
@@ -50,12 +50,14 @@
       </tr>
     </thead>
     <tbody>
+    <% @order_products.each do |order_product| %>
       <tr>
-        <th><%= @order.item.name %></th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th><%= order_product.item.name %></th>
+        <th><%= order_product.tax_included.to_s(:delimited) %>円</th>
+        <th><%= order_product.amount %>個</th>
+        <th><%= order_product.total_price.to_s(:delimited) %>円</th>
       </tr>
+    <% end %>
     </tbody>
   </table>
 </div>
