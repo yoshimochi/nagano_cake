@@ -69,3 +69,6 @@ gem "refile-mini_magick"
 gem 'kaminari','~> 1.2.1'
 
 gem 'pry-rails'
+
+gem 'bootstrap', '~> 4.5'
+gem 'jquery-rails'
