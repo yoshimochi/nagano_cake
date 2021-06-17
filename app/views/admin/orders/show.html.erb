@@ -50,7 +50,7 @@
         <td><%= order_product.amount %>個</td>
         <td><%= order_product.total_price.to_s(:delimited) %>円</td>
         <td>
-          <%= form_with model:@order_product, url:admin_order_product_path(order_product), method: :patch, local:true do |f| %>
+          <%= form_with model:order_product, url:admin_order_product_path(order_product), method: :patch, local:true do |f| %>
             <%= f.select :making_status, OrderProduct.making_statuses.keys.map{|k| [I18n.t("enums.order_product.making_status.#{k}"), k]}, {} %>
             <!--<#%= f.select :making_status, options_for_select(OrderProduct.making_statuses.keys, selected: OrderProduct.making_statuses[order_product.making_status]) %>-->
             <%= f.hidden_field :order_id, value: @order.id %>

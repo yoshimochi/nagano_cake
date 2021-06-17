@@ -5,4 +5,13 @@ class Item < ApplicationRecord
   attachment :image
 
   validates :is_active, inclusion: { in: [true, false]}
+
+  def self.search(search)
+    if search
+      Item.where(['content LIKE ?', "%#{search}%"])
+    else
+      Item.all
+    end
+  end
+
 end

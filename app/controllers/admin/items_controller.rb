@@ -28,6 +28,10 @@ class Admin::ItemsController < ApplicationController
     @item.update(item_params)
     redirect_to admin_items_path
   end
+  
+  def search
+    @items = Item.search(params[:search])
+  end
 
   private
 

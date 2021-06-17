@@ -54,6 +54,11 @@
         <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
       </li>
 
+      <%= form_tag(search_admin_items_path,:method => 'get') do %>
+        <%= text_field_tag :search %>
+        <%= submit_tag 'Search', :name => nil %>
+      <% end %>
+
     <% else %>
       <li>
         <%= link_to "About", about_path %>

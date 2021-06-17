@@ -41,12 +41,16 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
 
-    resources :items, only: [:new, :create, :index, :show, :edit, :update]
+    resources :items, only: [:new, :create, :index, :show, :edit, :update] do
+      collection do
+        get 'search'
+      end
+    end
     resources :genres, only: [:index, :create, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update]
     resources :orders, only: [:show, :update]
     resources :order_products, only: [:update]
-    
+
   end
 
 end
