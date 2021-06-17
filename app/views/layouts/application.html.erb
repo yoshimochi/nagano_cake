@@ -5,78 +5,92 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <% if customer_signed_in? %>
-      <li>
-        ようこそ<%= current_customer.last_name %>さん！
-      </li>
+    <header id="header" class:"navbar navbar-light bg-light">
+      <div class="container">
+        <nav class="nav navbar-light navbar-left">
 
-      <li>
-        <%= link_to "マイページ", customers_mypage_path %>
-      </li>
+        </nav>
 
-      <li>
-        <%= link_to "商品一覧", items_path %>
-      </li>
+        <nav class="clearfix">
+          <ul class="nav nav-pills navbar-light navbar-right">
+          <% if customer_signed_in? %>
 
-      <li>
-        <%= link_to "カート", cart_items_path %>
-      </li>
+            <li class="p-2 text-dark">
+              ようこそ<%= current_customer.last_name %>さん！
+            </li>
 
-      <li>
-        <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
-      </li>
-    <% elsif admin_signed_in? %>
-      <!--<li>-->
-      <!--  ようこそ%= current_customer.last_name %>さん！-->
-      <!--</li>-->
-      <li>
-        <%= link_to "商品一覧", admin_items_path %>
-      </li>
+            <li class="p-2 text-dark">
+              <%= link_to "マイページ", customers_mypage_path %>
+            </li>
 
-      <li>
-        <%= link_to "会員一覧", admin_customers_path %>
-      </li>
+            <li class="p-2 text-dark">
+              <%= link_to "商品一覧", items_path %>
+            </li>
 
-      <li>
-        <%= link_to "注文履歴一覧", admin_root_path %>
-      </li>
+            <li class="p-2 text-dark">
+              <%= link_to "カート", cart_items_path %>
+            </li>
 
-      <li>
-        <%= link_to "ジャンル一覧", admin_genres_path %>
-      </li>
+            <li class="p-2 text-dark">
+              <%= link_to "ログアウト", destroy_customer_session_path, method: :delete %>
+            </li>
 
-      <li>
-        <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
-      </li>
+          <% elsif admin_signed_in? %>
 
-      <%= form_tag(search_admin_items_path,:method => 'get') do %>
-        <%= text_field_tag :search %>
-        <%= submit_tag 'Search', :name => nil %>
-      <% end %>
+            <li class="p-2 text-dark">
+              <%= link_to "商品一覧", admin_items_path %>
+            </li>
 
-    <% else %>
-      <li>
-        <%= link_to "About", about_path %>
-      </li>
+            <li class="p-2 text-dark">
+              <%= link_to "会員一覧", admin_customers_path %>
+            </li>
 
-      <li>
-        <%= link_to "商品一覧", items_path %>
-      </li>
+            <li class="p-2 text-dark">
+              <%= link_to "注文履歴一覧", admin_root_path %>
+            </li>
 
-      <li>
-        <%= link_to "新規登録", new_customer_registration_path %>
-      </li>
+            <li class="p-2 text-dark">
+              <%= link_to "ジャンル一覧", admin_genres_path %>
+            </li>
 
-      <li>
-        <%= link_to "ログイン", new_customer_session_path %>
-      </li>
-    <% end %>
+            <li class="p-2 text-dark">
+              <%= link_to "ログアウト", destroy_admin_session_path, method: :delete %>
+            </li>
 
+            <%= form_tag(search_admin_items_path,:method => 'get') do %>
+              <%= text_field_tag :search %>
+              <%= submit_tag 'Search', :name => nil %>
+          <% end %>
+
+          <% else %>
+              <li class="p-2 text-dark">
+                <%= link_to "About", about_path %>
+              </li>
+
+              <li class="p-2 text-dark">
+                <%= link_to "商品一覧", items_path %>
+              </li>
+
+              <li class="p-2 text-dark">
+                <%= link_to "新規登録", new_customer_registration_path %>
+              </li>
+
+              <li class="p-2 text-dark">
+                <%= link_to "ログイン", new_customer_session_path %>
+              </li>
+          <% end %>
+          </ul>
+        </nav>
+      </div>
+    </header>
     <%= yield %>
   </body>
+
 </html>
