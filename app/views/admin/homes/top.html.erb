@@ -1,26 +1,29 @@
 <h2>注文履歴一覧</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>購入日時</th>
-      <th>購入者</th>
-      <th>注文個数</th>
-      <th>注文ステータス</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @orders.each do |order| %>
-    <tr>
-      <td>
-      <%= link_to admin_order_path(order.id) do %>
-        <%= order.created_at.strftime('%Y/%m/%d/ %H:%M:%S') %>
-      <% end %>
-      </td>
-      <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
-      <td><%= order.sum_order_products %></td>
-      <td><%= order.status %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="table-responsive">
+  <div class="col-md-10 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">購入日時</th>
+          <th scope="col">購入者</th>
+          <th scope="col">注文個数</th>
+          <th scope="col">注文ステータス</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @orders.each do |order| %>
+        <tr>
+          <td>
+          <%= link_to admin_order_path(order.id) do %>
+            <%= order.created_at.strftime('%Y/%m/%d/ %H:%M:%S') %>
+          <% end %>
+          </td>
+          <td><%= order.customer.last_name %><%= order.customer.first_name %></td>
+          <td><%= order.sum_order_products %></td>
+          <td><%= order.status %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

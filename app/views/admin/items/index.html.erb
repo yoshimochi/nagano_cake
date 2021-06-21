@@ -1,34 +1,47 @@
-<h2>商品一覧</h2>
-<%= link_to '＋', new_admin_item_path %>
 
-<table>
-  <thead>
-    <tr>
-      <th>商品ID</th>
-      <th>商品名</th>
-      <th>税抜価格</th>
-      <th>ジャンル</th>
-      <th>ステータス</th>
-    </tr>
-    <tr>
-  </thead>
-  <tbody>
-  <% @items.each do |item| %>
-    <tr>
-    <td><%= item.id %></td>
-    <td><%= link_to item.name, admin_item_path(item.id) %></td>
-    <td><%= converting_to_jpy(item.price) %></td>
-    <td><%= item.genre.name %></td>
-    <td>
-      <% if item.is_active == true %>
-        <p>販売中</p>
-      <% elsif item.is_active == false %>
-        <p>販売停止中</p>
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-2">
+      <h2>商品一覧</h2>
+    </div>
+    <div class="col-7"></div>
+    <div class="col-2">
+      <%= link_to '＋', new_admin_item_path, class:"btn btn-success" %>
+    </div>
+  </div>
+
+
+<div class="table-responsive">
+  <div class="col-md-10 col-sm-10 mx-2 mx-sm-auto shadow-lg rounded px-0 my-5">
+    <table class="table table-hover">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">商品ID</th>
+          <th scope="col">商品名</th>
+          <th scope="col">税抜価格</th>
+          <th scope="col">ジャンル</th>
+          <th scope="col">ステータス</th>
+        </tr>
+        <tr>
+      </thead>
+      <tbody>
+      <% @items.each do |item| %>
+        <tr>
+        <td><%= item.id %></td>
+        <td><%= link_to item.name, admin_item_path(item.id) %></td>
+        <td><%= converting_to_jpy(item.price) %></td>
+        <td><%= item.genre.name %></td>
+        <td>
+          <% if item.is_active == true %>
+            <p>販売中</p>
+          <% elsif item.is_active == false %>
+            <p>販売停止中</p>
+          <% end %>
+        </td>
+        </tr>
       <% end %>
-    </td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
-<%= paginate @items %>
-
+      </tbody>
+    </table>
+    <%= paginate @items %>
+  </div>
+</div>

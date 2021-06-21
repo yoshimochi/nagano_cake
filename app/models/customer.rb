@@ -21,6 +21,8 @@ class Customer < ApplicationRecord
     super && (is_active == false)
   end
 
-
+  def name
+    last_name + first_name
+  end
 
 end
