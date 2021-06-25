@@ -1,12 +1,37 @@
-<%= attachment_image_tag @item, :image, fallback: "no_image.png", size: "100x100" %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-2 mt-3">
+      <%= attachment_image_tag @item, :image, fallback: "no_image.png", size: "300x250", class: "rounded" %>
+    </div>
 
-<h3><%= @item.name %></h3>
-<p><%= @item.introduction %></p>
-<p>¥ <%= tax_price(@item.price).to_s(:delimited) %><span>(税込)</span></p>
-<% if @item.is_active == true %>
-  <%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
-    <%= f.hidden_field :item_id, value: @item.id %>
-    <%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
-    <%= f.submit "カートに入れる" %>
-  <% end %>
-<% end %>
+    <div class="col-md-3 ml-5 mt-5">
+      <div class="row">
+        <h4 class="font-weight-bold mt-3"><%= @item.name %></h4>
+      </div>
+      <div class="row mt-3">
+        <p class="ml-3"><%= @item.introduction %></p>
+      </div>
+      <div class="row">
+        <p class="font-weight-bold mt-3">¥ <%= tax_price(@item.price).to_s(:delimited) %><span>(税込)</span></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="offset-7">
+      <div class="row">
+        <% if @item.is_active == true %>
+          <%= form_with model: @cart_item, url: cart_items_path, local:true do |f| %>
+            <%= f.hidden_field :item_id, value: @item.id %>
+            <%= f.select :amount, options_for_select((1..10).to_a), include_blank: "個数選択" %>
+            <%= f.submit "カートに入れる", class: "btn btn-success ml-4" %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
     get 'customers/mypage' => 'customers#show'
     get 'customers/unsubscribe' => 'customers#unsubscribe'
-    patch 'customers/:id/widthdraw' => 'customers#widthdraw'
+    patch 'customers/widthdraw' => 'customers#widthdraw', as: "customers_widthdraw"
     resources :customers, only:[:edit, :update]
 
     resources :items, only:[:index, :show]

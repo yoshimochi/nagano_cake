@@ -1,55 +1,33 @@
 <div class="container">
-    <div class="row">
-        <div class="col-sm-4">
-            <h2>商品詳細</h2>
-        </div>
+  <div class="row">
+    <div class="col-md-4 offset-2 mt-5">
+      <%= attachment_image_tag @item, :image, fallback: "no_image.png", size: "300x250", class: "rounded" %>
     </div>
 
-    <div class="row">
-        <div class="col-4">
-            <%= attachment_image_tag @item, :image, fallback: "no_image.png", size: "200x150" %>
-        </div>
-
-        <div class="col-8">
-            <table class="item">
-                <tr>
-                    <td>商品名</td>
-                    <td><%= @item.name %></td>
-                </tr>
-
-                <tr>
-                    <td>商品説明</td>
-                    <td><%= @item.introduction %></td>
-                </tr>
-
-                <tr>
-                    <td>
-                        税抜価格<br>
-                        (税込価格)
-                    </td>
-                    <td><%= tax_price(@item.price).to_s(:delimited) %>（<%= converting_to_jpy(@item.price) %>） 円</td>
-                </tr>
-
-                <tr>
-                    <td>
-                        販売ステータス
-                        <% if @item.is_active == true %>
-                            <td class="text-success">販売中</td>
-                        <% elsif @item.is_active == false %>
-                            <td>売り切れ</td>
-                        <% end %>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td>
-                        <%= link_to '編集する', edit_admin_item_path(@item.id), class: "btn btn-success" %>
-                    </td>
-                </tr>
-            </table>
-
-        </div>
+    <div class="col-md-5 ml-5 mt-5">
+      <div class="row">
+        <p class="font-weight-bold mt-3">商品名: <%= @item.name %></p>
+      </div>
+      <div class="row">
+        <p class="font-weight-bold mt-3">商品説明: <%= @item.introduction %></p>
+      </div>
+      <div class="row">
+        <p class="font-weight-bold mt-3">税抜価格(税込価格): <%= tax_price(@item.price).to_s(:delimited) %>（<%= converting_to_jpy(@item.price) %>） 円</p>
+      </div>
+      <div class="row">
+        <p class="font-weight-bold mt-3">
+            販売ステータス:
+          <% if @item.is_active == true %>
+            <span class="text-success">販売中</span>
+          <% elsif @item.is_active == false %>
+            <span class="text-danger">売り切れ</span>
+          <% end %>
+        </p>
+      </div>
+      <div class="row">
+          
+        <%= link_to '編集する', edit_admin_item_path(@item.id), class: "btn btn-success" %>
+      </div>
     </div>
+  </div>
 </div>
-
-

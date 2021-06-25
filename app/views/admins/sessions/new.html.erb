@@ -1,23 +1,27 @@
 <div class="container h-auto">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-md-12">
       <div class="mt-5">
-          <h2 class="font-weight-bold">管理者ログイン</h2>
+        <div class="offset-2">
+            <h4 class="font-weight-bold">管理者ログイン</h4>
+        </div>
       </div>
 
       <div class="my-5">
         <%= form_with model: @admin, url: admin_session_path, local:true do |f| %>
 
-      	  <div class="field test-center">
-            <%= f.label "メールアドレス", class: "col-3" %> <%= f.email_field :email, placeholder: "sample@example.com", class: "col-6" %>
+      	  <div class="field text-center">
+            <%= f.label "メールアドレス", class: "col-2" %> <%= f.email_field :email, placeholder: "sample@example.com", class: "col-6" %>
       	  </div>
 
-      	  <div class="field test-center mt-2">
-            <%= f.label "パスワード", class: "col-3" %>    <%= f.password_field :password, class: "col-6" %>
+      	  <div class="field text-center mt-md-3">
+            <%= f.label "パスワード", class: "col-2" %>    <%= f.password_field :password, class: "col-6" %>
           </div>
 
-      	  <div class="field test-center mt-3">
-            <%= f.submit "ログイン", class: "btn btn-primary col-2" %>
+      	  <div class="field text-left mt-3">
+      	    <div class="offset-4">
+              <%= f.submit "ログイン", class: "btn btn-primary col-2" %>
+      	    </div>
           </div>
         <% end %>
       </div>

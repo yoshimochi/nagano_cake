@@ -1,11 +1,11 @@
 class Address < ApplicationRecord
   belongs_to :customer
 
-  validates :postcode, presence: true, numericality: { only_integer: true }, length: { is: 7 }
+  validates :postal_code, presence: true, numericality: { only_integer: true }, length: { is: 7 }
   validates :address, presence: true
-  validates :destination, presence: true
+  validates :name, presence: true
 
   def order_address
-	self.postal_code + self.address + self.name
+  	'〒' + postal_code  + "  " + address + "  " + name
   end
 end

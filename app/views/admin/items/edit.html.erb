@@ -1,45 +1,72 @@
 <div class="container">
-    <div class="row">
-      <h2 class="font-weight-bold mt-5 mb-5">商品編集</h2>
+  <div class="row">
+    <div class="col-md-10 mt-5 mx-auto">
+      <div class="offset-1">
+        <h4 class="font-weight-bold">商品編集</h4>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="row">
+<div class="container mx-auto">
+  <div class="offset-2">
+    <%= form_with model:@item, url:admin_item_path(@item.id), local:true do |f| %>
+    <form class="form-horizontal mt-5">
+        <div class="form-row">
+          <%= f.label :"商品画像", class: "col-md-2 control-label" %>
+          <div class="col">
+            <%= f.attachment_field :image %>
+          </div>
+        </div>
 
-        <%= form_with model:@item, url:admin_item_path(@item.id), local:true do |f| %>
-          <div class="form-group-row">
-            <%= f.label :"商品画像", class: "col-sm-2 col-form-label" %>
-            <div class="col-sm-10">
-              <%= f.attachment_field :image %>
+        <div class="form-row mt-3">
+          <%= f.label "商品名", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.text_field :name, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-row mt-3">
+          <%= f.label :"商品説明", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.text_area :introduction, class: "form-control", rows: "5" %>
+          </div>
+        </div>
+
+        <div class="form-row mt-3">
+          <%= f.label :"ジャンル", class: "col-md-2 control-label mt-2" %>
+          <div class="row ml-2">
+            <%= f.collection_select(:genre_id, Genre.all, :id, :name, prompt: "-- 選択してください --", class: "form-control") %>
+          </div>
+        </div>
+
+        <div class="form-row mt-3">
+          <%= f.label :"税抜価格(円)", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.text_field :price, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-row mt-3">
+          <%= f.label "販売ステータス", class: "col-md-2 control-label mt-1" %>
+          <div class="col">
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :is_active, true %>
+              <%= f.label :is_active, "販売中", value: :true, class: "form-check-label" %>
             </div>
-
-          <div class="form-group-row">
-            <%= f.label :"商品名", class: "ecol-sm-2 col-form-label" %>
-            <div class="col-sm-10">
-              <%= f.text_field :name, class: "form-control", id: "inputEmail3" %>
+            <div class="form-check form-check-inline">
+              <%= f.radio_button :is_active, false %>
+              <%= f.label :is_active, "販売停止中", value: :false, class: "form-check-label" %>
             </div>
-          </div>
-          <div class="form-group">
-            <%= f.label :"商品説明", class: "exampleFormControlTextarea1" %>
-            <%= f.text_area :introduction, class: "form-control", id:"exampleFormControlTextarea1", rows: "3" %>
-          </div>
-          <div class="form-group">
-            <%= f.label :"ジャンル", class: "exampleFormControlSelect1" %>
-            <%= f.collection_select(:genre_id, Genre.all, :id, :name, prompt: "-- 選択してください --", class: "form-control", id: "exampleFormControlSelect1") %>
-          </div>
-          <div class="form-group">
-            <%= f.label :"税抜価格", class: "exampleFormControlInput1" %>
-            <%= f.text_field :price, class: "form-control", id: "exampleFormControlInput1" %>円
-          </div>
-          <div class="form-group radio_button">
-            <%= f.label :"販売ステータス", class: "col-md-4 control-label" %>
-            <%= f.radio_button :is_active, true %>
-            <%= f.label :is_active, "販売中", value: :true %>
-            <%= f.radio_button :is_active, false, class: "ml-3" %>
-            <%= f.label :is_active, "販売停止中", value: :false %>
-          </div>
+          <div class="col"></div>
+        </div>
 
-          <%= f.submit '変更を保存', class: "btn btn-success" %>
-        <% end %>
-    </div>
-
+        <div class="col-md-10 m-4">
+          <div class="offset-2">
+            <%= f.submit '変更を保存', class: "btn btn-success" %>
+          </div>
+        </div>
+    </form>
+      <% end %>
+  </div>
 </div>

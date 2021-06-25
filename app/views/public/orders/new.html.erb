@@ -1,46 +1,59 @@
-<h2>注文情報入力</h2>
+<div class="container">
+  <div class="row">
+    <h2>注文情報入力</h2>
+  </div>
 
-<%= form_with model:@order, url: confirm_orders_path(@order), local:true do |f| %>
-<div>
-  <h4>支払方法</h4>
-    <%= f.radio_button :payment_method, :クレジットカード %>
-    <%= f.label :payment_method, "クレジットカード" %><br />
-    <%= f.radio_button :payment_method, :銀行振込 %>
-    <%= f.label :payment_method, "銀行振込" %>
+  <%= form_with model:@order, url: confirm_orders_path(@order), local:true do |f| %>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-check">
+        <h4>支払方法</h4>
+          <%= f.radio_button :payment_method, :クレジットカード, class: "form-check-input" %>
+          <%= f.label :payment_method, "クレジットカード", class: "form-check-label" %><br />
+          <%= f.radio_button :payment_method, :銀行振込, class: "form-check-input" %>
+          <%= f.label :payment_method, "銀行振込", class: "form-check-label" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class=col-md-8>
+      <div class="form-check">
+        <h4>お届け先</h4>
+          <div>
+            <%= f.radio_button :current_customer, "customer_address", class: "form-check-input" %>
+            <%= f.label :current_customer, 'ご自身の住所', class: "form-check-label" %><br />
+            〒<%= current_customer.postal_code %> <%= current_customer.address %><br />
+            <%= current_customer.last_name %><%= current_customer.first_name %>
+          </div>
+          <div>
+            <%= f.radio_button :current_customer, "delivery_address", class: "form-check-input" %>
+            <%= f.label :current_customer, '登録済住所から選択', class: "form-check-label" %><br />
+            <%= f.collection_select(:address_id, @addresses, :id, :order_address) %>
+          </div>
+          <div>
+            <%= f.radio_button :current_customer, "new_delivery_address", class: "form-check-input" %>
+            <%= f.label :current_customer, "新しいお届け先", class: "form-check-label" %><br />
+          </div>
+          <div>
+            <div>
+              <%= f.label :current_customer, "郵便番号(ハイフンなし)", class: "form-check-label" %>
+              <%= f.text_field :delivery_postal_code,  autofocus: true, placeholder: "0000000" %>
+            </div>
+            <div>
+              <%= f.label :current_customer, "お届け先", class: "form-check-label" %>
+              <%= f.text_field :delivery_address, autofocus: true, placeholder: "東京都渋谷区代々木神園町０-０" %>
+            </div>
+            <div>
+              <%= f.label :current_customer, "宛名", class: "form-check-label" %>
+              <%= f.text_field :delivery_name, autofocus: true, placeholder: "令和道子" %>
+            </div>
+          </div>
+            <%= f.submit '確認画面に進む', class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+  <% end %>
 </div>
 
-<div>
-  <h4>お届け先</h4>
-    <div>
-      <%= f.radio_button :current_customer, "customer_address" %>
-      <%= f.label :current_customer, 'ご自身の住所' %><br />
-      〒<%= current_customer.postal_code %> <%= current_customer.address %><br />
-      <%= current_customer.last_name %><%= current_customer.first_name %>
-    </div>
-    <div>
-      <%= f.radio_button :current_customer, "delivery_address" %>
-      <%= f.label :current_customer, '登録済住所から選択' %><br />
-      <%= f.collection_select(:address_id, @addresses, :id, :order_address) %>
-    </div>
-    <div>
-      <%= f.radio_button :current_customer, "new_delivery_address" %>
-      <%= f.label :current_customer, "新しいお届け先" %><br />
-    </div>
-    <div>
-      <div>
-        <%= f.label :current_customer, "郵便番号(ハイフンなし)" %>
-        <%= f.text_field :delivery_postal_code,  autofocus: true, placeholder: "0000000" %>
-      </div>
-      <div>
-        <%= f.label :current_customer, "お届け先" %>
-        <%= f.text_field :delivery_address, autofocus: true, placeholder: "東京都渋谷区代々木神園町０-０" %>
-      </div>
-      <div>
-        <%= f.label :current_customer, "宛名" %>
-        <%= f.text_field :delivery_name, autofocus: true, placeholder: "令和道子" %>
-      </div>
-    </div>
-      <%= f.submit '確認画面に進む' %>
-</div>
-<% end %>
+
 

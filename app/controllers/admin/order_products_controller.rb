@@ -5,7 +5,7 @@ class Admin::OrderProductsController < ApplicationController
     @order_product = OrderProduct.find(params[:id])
     @order = @order_product.order
     @order_product.update(order_product_params)
-      if params[:making_status] == "製作中"
+      if @order_product.making_status == "製作中"
         @order = @order_product.order
         @order.update(status: 2)
       elsif @order.order_products.where(making_status: "製作完了").count == @order.order_products.count
@@ -13,7 +13,7 @@ class Admin::OrderProductsController < ApplicationController
         @order.update(status: 3)
       end
 
-    redirect_to admin_root_path(@order_product.order)
+    redirect_to admin_order_path(@order.id)
   end
 
   private
