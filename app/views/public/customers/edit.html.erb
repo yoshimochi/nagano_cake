@@ -1,39 +1,73 @@
-<h4>会員情報</h4>
-
-<%=form_with model:@customer, local:true do |f| %>
-
-  <div>
-    <label>氏名</label>
-    <%= f.text_field :last_name %>
-    <%= f.text_field :first_name %>
+<div class="container">
+  <div class="row">
+    <div class="col-md-10 mt-5 mx-auto">
+      <h4 class="font-weight-bold">会員情報編集</h4>
+    </div>
   </div>
+</div>
 
-  <div>
-    <label>フリガナ</label>
-    <%= f.text_field :last_name_kana %>
-    <%= f.text_field :first_name_kana %>
+<div class="container mx-auto">
+  <div class="offset-1">
+    <%= form_with model:@customer, url: customer_path(@customer), local:true do |f| %>
+    <form class="form-horizontal mt-5">
+        <div class="form-row mt-3">
+          <%= f.label "氏名", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.text_field :last_name, class: "form-control"  %>
+          </div>
+          <div class="col">
+            <%= f.text_field :first_name, class: "form-control"  %>
+          </div>
+        </div>
+
+         <div class="form-row mt-3">
+          <%= f.label "フリガナ", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.text_field :last_name_kana, class: "form-control"  %>
+          </div>
+          <div class="col">
+            <%= f.text_field :first_name_kana, class: "form-control"  %>
+          </div>
+        </div>
+
+         <div class="form-row mt-3">
+          <%= f.label "郵便番号", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.text_field :postal_code, class: "form-control"  %>
+          </div>
+          <div class="col"></div>
+        </div>
+
+        <div class="form-row mt-3">
+          <%= f.label "住所", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.text_field :address, class: "form-control"  %>
+          </div>
+        </div>
+
+        <div class="form-row mt-3">
+          <%= f.label "電話番号", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.text_field :telephone_number, class: "form-control"  %>
+          </div>
+          <div class="col"></div>
+        </div>
+
+        <div class="form-row mt-3">
+          <%= f.label "メールアドレス", class: "col-md-2 control-label mt-2" %>
+          <div class="col">
+            <%= f.email_field :email, class: "form-control"  %>
+          </div>
+          <div class="col"></div>
+        </div>
+
+        <div class="col-md-10 m-4">
+          <div class="offset-2">
+            <%= f.submit '変更を保存', class: "btn btn-success" %>
+            <%= link_to '退会する', customers_unsubscribe_path, class: "btn btn-danger ml-5" %>
+          </div>
+        </div>
+    </form>
+    <% end %>
   </div>
-
-  <div>
-    <label>郵便番号</label>
-    <%= f.text_field :postal_code %>
-  </div>
-
-  <div>
-    <label>住所</label>
-    <%= f.text_field :address %>
-  </div>
-
-  <div>
-    <label>電話番号</label>
-    <%= f.text_field :telephone_number %>
-  </div>
-
-  <div>
-    <label>メールアドレス</label>
-    <%= f.email_field :email %>
-  </div>
-
-  <%= f.submit '変更内容を保存' %>
-  <%= link_to '退会する', customers_unsubscribe_path %>
-<% end %>
+</div>

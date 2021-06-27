@@ -27,6 +27,7 @@ class Public::CustomersController < ApplicationController
   def widthdraw
     @customer = current_customer
     @customer.update(is_active: true)
+    reset_session
     redirect_to root_path
   end
 

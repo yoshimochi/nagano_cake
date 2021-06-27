@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     registrations: 'admins/registrations'
   }
 
-  devise_for :customers
+  devise_for :customers, path: 'customers', controllers: {
+    sessions: 'customers/sessions',
+    passwords: 'customers/passwords',
+    registrations: 'customers/registrations'
+  }
 
 
   scope module: :public do
@@ -15,7 +19,7 @@ Rails.application.routes.draw do
 
     get 'customers/mypage' => 'customers#show'
     get 'customers/unsubscribe' => 'customers#unsubscribe'
-    patch 'customers/:id/widthdraw' => 'customers#widthdraw'
+    patch 'customers/widthdraw' => 'customers#widthdraw', as: "customers_widthdraw"
     resources :customers, only:[:edit, :update]
 
     resources :items, only:[:index, :show]

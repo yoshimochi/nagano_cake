@@ -1,18 +1,45 @@
-<h4>
-  ようこそ、ながのCAKEへ！<br />
-  このサイトは、ケーキ販売のECサイトになります。<br />
-  会員でない方も商品の閲覧はできますが、<br />
-  購入には会員登録が必要になります。
-</h4>
+<section class="text-center">
+  <div class="container mt-5">
+    <h4 class="font-weight-bold">
+      ようこそ、ながのCAKEへ！<br />
+      このサイトは、ケーキ販売のECサイトになります。<br />
+      会員でない方も商品の閲覧はできますが、<br />
+      購入には会員登録が必要になります。
+    </h4>
+  </div>
+</section>
 
-<h3>新着商品</h3>
 
-<% @items.each do |item| %>
-  <%= link_to item_path(item.id) do %>
-    <%= attachment_image_tag item, :image, fallback: "no_image.png", size: "100x100" %>
-  <% end %>
-    <p>商品名　<%= item.name %></p>
-    <p>¥ <%= item.price.to_s(:delimited) %></p>
-<% end %>
+<div class="album py-5">
+  <div class="container">
+    <div class="row">
+      <div class="top-new">
+          <h4 class="font-weight-bold mb-4">新着商品</h4>
+      </div>
+    </div>
 
-<%= link_to '全ての商品を見る>', items_path %>
+    <div class="row">
+    <% @items.each do |item| %>
+      <div class="col-md-3">
+        <div class="card mb-3 shadow-sm h-100" >
+          <%= link_to item_path(item.id), :style=> "color:black" do %>
+            <%= attachment_image_tag item, :image, fallback: "no_image.png", width: "100%", height: "180", class: "card-image-top" %>
+          <% end %>
+          <div class="card-body">
+            <h6 class="card-title">商品名　<%= item.name %></h6>
+            <p class="card-text">¥ <%= item.price.to_s(:delimited) %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-11">
+      <div class="text-right mt-4">
+        <%= link_to '全ての商品を見る>', items_path %>
+      </div>
+    </div>
+  </div>
+</div>

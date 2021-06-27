@@ -4,6 +4,7 @@ class Item < ApplicationRecord
   has_many :order_products, dependent: :destroy
   attachment :image
 
+  validates :price, presence: true
   validates :is_active, inclusion: { in: [true, false]}
 
   def self.search(search)

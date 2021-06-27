@@ -28,7 +28,10 @@ class Public::OrdersController < ApplicationController
         @order.delivery_postal_code = params[:order][:delivery_postal_code]
         @order.delivery_address = params[:order][:delivery_address]
         @order.delivery_name = params[:order][:delivery_name]
-        @address = "1"
+        @address = Address.new
+        @address.postal_code = params[:order][:delivery_postal_code]
+        @address.address = params[:order][:delivery_address]
+        @address.name = params[:order][:delivery_name]
       else
         flash[:danger] = "新しいお届け先が入力されていません"
         redirect_to new_order_path
@@ -37,7 +40,7 @@ class Public::OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = current_customer.orders.new(order_params)
     @order.customer_id = current_customer.id
     @order.status = 0
 
@@ -53,9 +56,7 @@ class Public::OrdersController < ApplicationController
         @order_product.save
       end
 
-      if params[:order][:address] == "1"
-        current_customer.addresses.create(address_params)
-      end
+      current_customer.addresses.create(address_params)
 
       current_customer.cart_items.destroy_all
       redirect_to thanks_orders_path
@@ -68,7 +69,7 @@ class Public::OrdersController < ApplicationController
 
 
   def index
-    @orders = current_customer.orders.page(params[:page]).reverse_order
+    @orders = current_customer.orders.page(params[:page]).per(8)
     # @orders = Order.where(customer_id: current_customer.id).order("created_at DESC")
   end
 

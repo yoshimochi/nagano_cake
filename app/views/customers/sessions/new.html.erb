@@ -1,20 +1,62 @@
-<h2>ログイン</h2>
-
-
-<%= form_with model: @customer, url:customer_session_path, local:true do |f| %>
-  <h4>会員の方はこちらからログイン</h4>
-  <div class="field">
-    <%= f.label :email %>　<%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com" %>
+<div class="container mx-auto">
+  <div class="row">
+    <div class="offset-1">
+      <h3 class="font-weight-bold mt-5">ログイン</h3>
+    </div>
   </div>
+</div>
 
-  <div class="field">
-    <%= f.label :password %>　<%= f.password_field :password, autocomplete: "current-password" %>
+<div class="container mx-auto">
+  <div class="row">
+    <div class="col-md-10 mt-5 mx-auto">
+      <h4 class="font-weight-bold">会員の方はこちらからログイン</h4>
+    </div>
   </div>
+</div>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+<div class="container mx-auto">
+  <div class="offset-2">
+  <%= form_with model: @customer, url:customer_session_path, local:true do |f| %>
+    <form class="form-horizontal mt-5">
+      <div class="form-row mt-3 mx-auto">
+        <%= f.label "メールアドレス", class: "col-md-3 control-label" %>
+        <div class="col">
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "sample@example.com", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="form-row mt-3">
+        <%= f.label "パスワード", class: "col-md-3 control-label" %>
+        <div class="col">
+          <%= f.password_field :password, autocomplete: "current-password", class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="col-md-11 mt-4 ml-3">
+        <div class="offset-3">
+          <%= f.submit 'ログイン', class: "btn btn-primary w-25" %>
+        </div>
+      </div>
+    </form>
+  <% end %>
   </div>
-<% end %>
+</div>
 
-<h4>会員登録がお済みでない方</h4>
-<p><%= link_to 'こちら', new_customer_registration_path %> から新規登録を行なってください。</p>
+
+
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="offset-1">
+      <h4 class="font-weight-bold mt-md-5">会員登録がお済みでない方</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="offset-2 mt-4 mb-5">
+      <p><%= link_to 'こちら', new_customer_registration_path, class: "btn btn-md btn-outline-success" %> から新規登録を行なってください。</p>
+    </div>
+  </div>
+</div>
+
+
+
