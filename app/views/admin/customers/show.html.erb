@@ -15,50 +15,50 @@
             <td>会員ID</td>
             <td><%= @customer.id %></td>
           </tr>
-  
+
           <tr>
             <td>氏名</td>
             <td><%= @customer.last_name %> <%= @customer.first_name %></td>
           </tr>
-  
+
           <tr>
             <td>フリガナ</td>
             <td><%= @customer.last_name_kana %> <%= @customer.first_name_kana %></td>
           </tr>
-  
+
           <tr>
             <td>郵便番号</td>
             <td><%= @customer.postal_code %></td>
           </tr>
-  
+
           <tr>
             <td>住所</td>
             <td><%= @customer.address %></td>
           </tr>
-  
+
           <tr>
             <td>電話番号</td>
             <td><%= @customer.telephone_number %></td>
           </tr>
-  
+
           <tr>
             <td>メールアドレス</td>
             <td><%= @customer.email %></td>
           </tr>
-  
+
           <tr>
             <td>会員ステータス</td>
             <td>
               <% if @customer.is_active == false %>
                 <p class="text-success">有効</p>
               <% elsif @customer.is_active == true %>
-                <pclass="text-danger">退会</p>
+                <p class="text-danger">退会</p>
               <% end %>
             </td>
           </tr>
         </table>
       </div>
-      
+
       <div class="offset-5">
         <%= link_to '編集する', edit_admin_customer_path(@customer.id), class: "btn btn-success ml-2" %>
         <%= link_to '注文一覧を見る', admin_root_path(@customer), class: "btn btn-primary ml-5" %>

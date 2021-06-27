@@ -1,10 +1,14 @@
 <div class="container">
   <div class="row">
-    <h4>注文情報確認</h4>
+    <div class="col-md-10 mt-5 mx-auto">
+      <div class="offset-1">
+        <h4 class="font-weight-bold">注文情報確認</h4>
+      </div>
+    </div>
   </div>
-  
+
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-7 mt-5">
       <table class="table table-bordered table-hover">
         <thead class="table-active">
           <tr>
@@ -31,7 +35,7 @@
         </tbody>
       </table>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 mt-5">
       <table class="table table-bordered">
           <tr>
             <td class="table-active">送料</th>
@@ -48,7 +52,7 @@
       </table>
     </div>
   </div>
-  
+
   <div class="row">
     <div class="col-md-7">
       <table class="table table-borderless">
@@ -78,7 +82,7 @@
     <%= f.hidden_field :status %>
     <%= f.hidden_field :payment_method %>
     <div class="text-center">
-      <%= f.submit '注文を確定する', class: "btn btn-success" %>
+      <%= f.submit '注文を確定する', class: "btn btn-success w-25" %>
     </div>
   </div>
   <% end %>

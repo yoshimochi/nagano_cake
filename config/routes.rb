@@ -6,7 +6,11 @@ Rails.application.routes.draw do
     registrations: 'admins/registrations'
   }
 
-  devise_for :customers
+  devise_for :customers, path: 'customers', controllers: {
+    sessions: 'customers/sessions',
+    passwords: 'customers/passwords',
+    registrations: 'customers/registrations'
+  }
 
 
   scope module: :public do

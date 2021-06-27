@@ -1,15 +1,19 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-      <h4>マイページ</h4>
+      <div class="offset-2">
+        <h4 class="font-weight-bold mt-4 mb-3">マイページ</h4>
+      </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-3 mt-3">
       <table class="table table-borderless">
         <tr>
-          <th>登録情報</th>
+          <th>
+            <h4 class="font-weight-bold mt-1">登録情報</h4>
+          </th>
           <td><%=link_to '編集する', edit_customer_path(@customer), class: "btn btn-success" %></td>
         </tr>
       </table>
@@ -57,7 +61,7 @@
       </table>
     </div>
   </div>
-  
+
   <div class="row">
     <div class=col-md-3>
     <table class="table table-borderless">
@@ -70,7 +74,7 @@
         <td><%= link_to '一覧を見る', orders_path, class: "btn btn-primary" %></td>
       </tr>
     </table>
-      
+
   </div>
 </div>
 

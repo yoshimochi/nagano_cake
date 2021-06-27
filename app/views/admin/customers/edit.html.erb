@@ -48,14 +48,6 @@
         <div class="form-row mt-3">
           <%= f.label "住所", class: "col-md-2 control-label mt-2" %>
           <div class="col">
-            <%= f.text_field :postal_code, class: "form-control"  %>
-          </div>
-          <div class="col"></div>
-        </div>
-
-        <div class="form-row mt-3">
-          <%= f.label "郵便番号", class: "col-md-2 control-label mt-2" %>
-          <div class="col">
             <%= f.text_field :address, class: "form-control"  %>
           </div>
         </div>
@@ -89,6 +81,7 @@
             </div>
           <div class="col"></div>
         </div>
+
         <div class="col-md-10 m-4">
           <div class="offset-2">
             <%= f.submit '変更を保存', class: "btn btn-success" %>

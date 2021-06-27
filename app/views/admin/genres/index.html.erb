@@ -2,24 +2,23 @@
   <div class="row">
     <div class="col-md-10 px-md-0 mx-auto">
       <div class="offset-2">
-        <h4 class="font-weight-bold mt-4">ジャンル一覧・追加</h4>
+        <h4 class="font-weight-bold mt-5">ジャンル一覧・追加</h4>
       </div>
     </div>
   </div>
 
+  <%= form_with model:@genre, url: admin_genres_path, local:true do |f| %>
   <div class="row">
-    <div class="col-md-10 px-md-0 mx-auto">
-      <div class="mb-3">
-      <%= form_with model:@genre, url: admin_genres_path, local:true do |f| %>
-      </div>
+    <div class="col-md-10 px-md-0 mt-3 mx-auto">
+      <div class="mb-3"></div>
 
       <div class="field mb-4">
-        <%= f.label "ジャンル名" %>
+        <%= f.label "ジャンル名", class: "font-weight-bold" %>
         <%= f.text_field :name, class: "mx-5" %></h4>
         <%= f.submit '新規登録', class: "btn btn-success" %>
       </div>
-      <% end %>
   </div>
+  <% end %>
 
   <div class="row ml-5 pl-4">
     <div class="col-12">
