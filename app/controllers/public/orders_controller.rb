@@ -11,6 +11,7 @@ class Public::OrdersController < ApplicationController
   def confirm
     @cart_items = current_customer.cart_items
     @order = Order.new
+    @order.payment_method = params[:order][:payment_method]
 
     if params[:order][:current_customer] == "customer_address"
       @order.delivery_postal_code = current_customer.postal_code
@@ -70,7 +71,6 @@ class Public::OrdersController < ApplicationController
 
   def index
     @orders = current_customer.orders.page(params[:page]).per(8)
-    # @orders = Order.where(customer_id: current_customer.id).order("created_at DESC")
   end
 
   def show
